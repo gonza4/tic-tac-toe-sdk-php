@@ -1,5 +1,5 @@
 {
-    "name": "root/tic-tac-toe-sdk-php",
+    "name": "gonza4/tic-tac-toe-sdk-php",
     "description": "Api clietn to play Tic Tac Toe",
     "type": "library",
     "license": "MIT",
