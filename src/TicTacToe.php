@@ -20,17 +20,15 @@ class TicTacToe
     /**
      * Get a empty board
      *
-     * @param int $index
-     *
      * @return array
      */
-    public function getEmptyBoard($index)
+    public function getEmptyBoard()
     {
         $ch = curl_init();
 
         $headers = array(
-        'Accept: application/json',
-        'Content-Type: application/json'
+            'Accept: application/json',
+            'Content-Type: application/json'
         );
 
         curl_setopt($ch, CURLOPT_URL, $this->server.'board');
@@ -41,6 +39,37 @@ class TicTacToe
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);
 
         $result = curl_exec($ch);
+
+        curl_close ($ch);
+
+        return $result;
+    }
+
+    /**
+     * Make a move in the game
+     *
+     * @param int $index
+     *
+     * @return array
+     */
+    public function postPlayGame($index)
+    {
+        $ch = curl_init();
+
+        $data = array(
+            'indice' => $index
+        );
+         
+        $payload = json_encode($data);
+
+        curl_setopt($ch, CURLOPT_URL, $this->server.'game/start');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($ch);
+
+        curl_close($ch);
 
         return $result;
     }
